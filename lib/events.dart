@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-
 Future<List<Event>> fetchEvents() async {
   final response = await http.get(
     Uri.parse('https://www.thebluealliance.com/api/v3/events/2022'),
@@ -29,11 +28,13 @@ class Event {
   final String name;
   final int year;
   final String city;
+  final String searchTerms;
 
-  const Event({
+  Event({
     required this.name,
     required this.year,
     required this.city,
+    this.searchTerms = "",
   });
 
   factory Event.fromJson(Map<String, dynamic> json) {
@@ -41,6 +42,7 @@ class Event {
       city: json["city"],
       name: json["name"],
       year: json["year"],
+      searchTerms: json.values.whereType<String>().join(),
     );
   }
 }
