@@ -47,7 +47,9 @@ class _MyAppState extends State<MyApp> {
             if (snapshot.hasData) {
               List<Event> events = snapshot.data as List<Event>;
               List<Event> matchingEvents = events
-                  .where((event) => event.searchTerms.contains(searchString))
+                  .where((event) => searchString
+                      .split(",")
+                      .every((term) => event.searchTerms.contains(term)))
                   .toList();
               return Column(
                 children: [

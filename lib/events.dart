@@ -28,7 +28,7 @@ class Event {
   final String name;
   final int year;
   final String city;
-  final String searchTerms;
+  String searchTerms;
 
   Event({
     required this.name,
@@ -42,7 +42,7 @@ class Event {
       city: json["city"],
       name: json["name"],
       year: json["year"],
-      searchTerms: json.values.whereType<String>().join(),
+      searchTerms: json.values.whereType<String>().join(""),
     );
   }
 }
